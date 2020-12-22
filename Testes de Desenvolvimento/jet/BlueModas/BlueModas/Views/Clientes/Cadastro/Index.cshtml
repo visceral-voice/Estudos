@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Blue Modas";
+}
+
+<div style="margin-top:40px">
+    <div class="container login-container">
+        <div class="col-md-6 login-form-2">
+            <h3>Novo Usuário:</h3>
+            @using (Html.BeginForm("Incluir", "Clientes", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="Nome" class="control-label">Nome</label>
+                    <input id="Nome" name="Nome" class="form-control" placeholder="Digite seu nome completo" type="text"
+                           data-error="Por favor, informe seu nome completo." required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="Telefone" class="control-label">Telefone</label>
+                    <input id="Telefone" name="Telefone" class="form-control" placeholder="Informe o seu telefone" type="tel"
+                           data-error="Por favor, informe um telefone válido." required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="Email" class="control-label">Email</label>
+                    <input id="Email" name="Email" class="form-control" placeholder="Digite seu E-mail" type="email"
+                           data-error="Por favor, informe um e-mail válido." required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="Incluir" />
+                </div>
+            }
+        </div>
+    </div>
+
+</div>

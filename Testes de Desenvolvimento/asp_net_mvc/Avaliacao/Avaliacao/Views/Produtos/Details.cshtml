@@ -1,0 +1,43 @@
+﻿@model Avaliacao.Models.ProdutoViewModel
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+<br />
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Produto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Categoria_Id)*@
+            <b>Categoria</b>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria_Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Preco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Preco)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Alterar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar ao Início", "Index")
+</p>

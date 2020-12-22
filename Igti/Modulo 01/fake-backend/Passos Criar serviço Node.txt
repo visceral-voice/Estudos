@@ -1,0 +1,10 @@
+Criar projeto Node 
+	Entrar na pasta 
+		npm init -y
+Criar servidor Json
+	Entrar na pasta
+		npm install json-server --save-dev
+Incluir no Json apos "test"
+	,"start": "json-server --watch countries.json --port 3001"
+Iniciar
+	npm start

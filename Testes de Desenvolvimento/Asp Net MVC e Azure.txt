@@ -1,0 +1,46 @@
+Asp Net MVC e Azure
+
+Etapas: 
+Criação do Projeto
+Criação da classe modelo Models.XXX.cs
+Criaçao conexao banco Models.XXXDbContent.cs
+Criação da interface Models.IXXXRepository.cs
+Implentação da interface criada Models.XXXRepository.cs
+Criação do Controller Controllers.XXXApiController.cs
+Criar o MVC Controller usando Scaffolding
+Alterar Controller convertendo as açoes para assincrono Controllers.XXXsController.cs
+Modificar as Viewa e pagina inicial
+
+
+mysql -h srpp-db.mysql.database.azure.com -u sergio@srpp-db -p
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| testando_db        |
++--------------------+
+5 rows in set (0.45 sec)
+
+CREATE TABLE Produtos (Id int PRIMARY KEY, Nome VARCHAR(100), Categoria_Id int, Preco DECIMAL(10,2), CONSTRAINT fk_Categoria_Id FOREIGN KEY (Categoria_Id) REFERENCES Categorias(Id));
+
+CREATE TABLE Categorias (Id int PRIMARY KEY, Nome VARCHAR(100));
+
+Database=testando_db; Data Source=srpp-db.mysql.database.azure.com; User Id=sergio@srpp-db; Password=Srpp@1973
+
+CREATE TABLE cars (Id int PRIMARY KEY, Model VARCHAR(100), Year VARCHAR(100));
+
+Web API MVC com CRUD Pattern Swagger
+
+@Html.DropDownList("Categoria", (IEnumerable<SelectListItem>)ViewBag.categoria, "Selecione", new { onchange = "javascript:recuperaCategoria()" })
+
+var item = document.getElementById('Categoria').value;
+document.getElementById('Categoria_Id').value = item; 
+class="dropdown-menu"
+
+https://bitbucket.org/VisceralVoice/teste/src/master/
+
+

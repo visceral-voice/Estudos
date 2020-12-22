@@ -1,0 +1,59 @@
+{
+  "nextId": 11,
+  "lancamentos": [
+    {
+      "valor": 1000,
+      "categoria": "Salário",
+      "data": "17/12/2020",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "valor": 1000,
+      "categoria": "Salário",
+      "data": "17/12/2020"
+    },
+    {
+      "id": 4,
+      "valor": 1000,
+      "categoria": "Salário",
+      "data": "17/12/2020"
+    },
+    {
+      "id": 5,
+      "valor": -200,
+      "categoria": "Supermercado",
+      "data": "17/12/2020"
+    },
+    {
+      "id": 6,
+      "valor": -200,
+      "categoria": "Supermercado",
+      "data": "17/12/2020"
+    },
+    {
+      "id": 7,
+      "valor": -200,
+      "categoria": "Supermercado",
+      "data": "17/12/2020"
+    },
+    {
+      "id": 8,
+      "valor": 1000,
+      "categoria": "Salário",
+      "data": "17/12/2020"
+    },
+    {
+      "id": 9,
+      "valor": 2000,
+      "categoria": "Salário",
+      "data": "17/12/2020"
+    },
+    {
+      "id": 10,
+      "valor": -300,
+      "categoria": "Supermercado",
+      "data": "17/12/2020"
+    }
+  ]
+}

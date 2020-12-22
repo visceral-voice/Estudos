@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel = "stylesheet" href = "./css/style.css">
+  <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="./js/script.js"></script>
+  <title>Desáfio Final Modulo 01</title>
+</head>
+<body class="container">   
+  <h1>Pesquisa de usuários</h1>
+  <div class="preloader" id="preloader">
+    <img src="./img/Loading.gif">
+  </div>
+  <div class="row">
+     <form class="col s12">
+        <div class="row">
+           <div class="input-field col s10">
+              <input type="text" id ="searchName" class="input-field" />
+              <label for="searchName">Busca</label>
+           </div>
+           <div class="flex-button">
+             <button id="searchButton" disabled class="btn-small waves-effect waves-light" type="submit" name="action">BUSCAR</button>
+           </div>
+        </div>
+     </form>       
+  </div>
+  <div class="containers">
+    <div class="fixed" id="tabUsers"></div>
+    <div class="flex-item" id="tabData"></div>
+  </div>
+</body>   
+</html>

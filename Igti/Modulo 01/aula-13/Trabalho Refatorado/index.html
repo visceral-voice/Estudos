@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/reset.css">
+   <link rel="stylesheet" href="./css/materialize.css">
+   <link rel="stylesheet" href="./css/style.css">
+  <title>Números por extenso</title>
+</head> 
+<body>
+  <div>
+      <h1>Números por Extenso</h1>
+  </div>
+  <div class="container">
+    <h5>Escolha um número entre 0 e 999</h5>
+    <input type="range" min="0" max="999" id="numberRange" />
+    <div class="input-field">
+      <input id="numberValue" type="text" disabled readonly value="0" />
+      <label for="numberValue" class="active">Número atual:</label>
+    </div>	
+    <div class="input-field">
+      <input id="numberExtense" type="text" disabled readonly value="Zero" />
+      <label for="numberExtense" class="active">Número por extenso:</label>
+    </div>
+  </div>
+<script defer src="./js/script.js"></script>
+</body>
+</html>

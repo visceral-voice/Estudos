@@ -1,0 +1,52 @@
+body {
+  padding: 0px;
+}
+h1 {
+  text-align: center;
+  font-size: 5rem;
+}
+h5 {
+  padding-top: 10px;
+  text-align: left;
+  font-size: 2rem;
+}
+.person {
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
+  align-items: left;
+}
+.person_information {
+  padding-top: 10px;
+  font-size: small;
+  padding-left: 10px;
+}
+.preloader {
+  text-align: center;
+}
+.containers {
+  display: flex;
+  width: 100%;
+}
+.fixed {
+  position: relative;
+  width: 50%;
+  height: auto;
+}
+.flex-item {
+  flex-grow: 1;
+  position: relative;
+  width: 50%;
+  height: auto;
+}
+.flex-button {
+  padding-top: 27px;
+  flex-grow: 1;
+}
+.image {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 50%;
+}

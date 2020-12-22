@@ -1,0 +1,23 @@
+﻿<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/validator.min.js"></script>
+
+<div class="container login-container">
+    <div class="col-md-6 login-form-2">
+        <h3>Identifique-se abaixo:</h3>
+        @using (Html.BeginForm("Buscar", "Clientes", FormMethod.Post))
+        {
+
+        <div class="form-group">
+            <label for="Email" class="control-label">Email</label>
+            <input id="Email" name="Email" class="form-control" placeholder="Digite seu E-mail" type="email"
+                   data-error="Por favor, informe um e-mail válido." required>
+        <div class="help-block with-errors"></div>
+        </div>
+            <div class="form-group">
+                <input type="submit" class="btnSubmit" value="Login" />
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@model BlueModas.Models.Pedidos
+<table class="table-responsive">
+    <tr>
+        <th class="col-md-8">
+            Produto
+        </th>
+        <th class="col-lg-2">
+            Quantidade
+        </th>
+        <th>
+            Valor total
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Produtos)
+    {
+        <tr>
+            <td>
+                <b>@Html.DisplayFor(modelItem => item.Nome)</b>
+            </td>
+            <td>
+                <div class="btn-group inline" role="group" aria-label="Basic example">
+                    <input type="button" onclick="location.href='Pedidos/AddProduto/@Html.DisplayFor(modelItem => item.Id)'" class="btn btn-default border" value="+">
+                    <input type="button" class="btn btn-default border" value="@Html.DisplayFor(modelItem => item.Qtde)">
+                    <input type="button" onclick="location.href='Pedidos/RemoveProduto/@Html.DisplayFor(modelItem => item.Id)'" class="btn btn-default border" value="-">
+                </div>
+            </td>
+            <td>
+                <b>@Html.DisplayFor(modelItem => item.PrecoTotal)</b>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="3" class="right"></td>
+    </tr>
+</table>
+<br />
+<br />
+<br />
+<div id="finalizar">
+    <a href="Clientes" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Finalizar Pedido</a>
+</div>
