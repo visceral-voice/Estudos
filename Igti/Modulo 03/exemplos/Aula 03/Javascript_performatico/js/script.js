@@ -8,17 +8,17 @@ function start(){
 }
 
 function handleButton(){
-    list.push(getTimeStamp());
-    render();
+    let item = getTimeStamp();
+    list.push(item);
+    render(item);
 }
 
-function render(){
-  let lis = "";
-  list.map(item => {
-    lis = lis + `<li>${item}</li>`
-  });
+function render(item){
+  let li = document.createElement("li");
+  li.textContent = item;
+
   let ul = document.querySelector("#data");
-  ul.innerHTML = lis;
+  ul.appendChild(li);
 
   document.title = list.length;
 }
