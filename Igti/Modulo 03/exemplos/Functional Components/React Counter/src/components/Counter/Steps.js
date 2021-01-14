@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import css from './counter.module.css';
 
-export default class Steps extends Component {
-  render() {
-    return (
-      <spam className={css.counterValue}>({this.props.value})</spam>
-    );
-  }
+export default function Steps(props) {
+  return (
+    <spam className={css.counterValue}>({props.value})</spam>
+  );
 }
