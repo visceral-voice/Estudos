@@ -1,39 +1,29 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect} from 'react';
 import Candidates from './components/Candidates';
 import Header from './components/Header';
 import Spinner from './components/Spinner';
 
-export default class App extends Component {
-  constructor(){
-    super();
-
-    this.state = {
-      candidates: []
-    }
-
-    this.interval = null;
-  }
-
-  async componentDidMount(){
-    this.interval = setInterval(() => {
+export default function App() {
+  const [ candidates, setCandidates ] = useState([]);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
       fetch("http://localhost:8080/votes").then(res => {
-        res.json().then(json => {
-          this.setState({
-            candidates: json.candidates
-          })
-        });
-      });
+              res.json().then(json => {
+                setCandidates(json.candidates);
+              });
+            });
     }, 1000);
-  }
-
-  render() {
-    const {candidates} = this.state;
-    if(candidates.length ===0){
-      return <Spinner description="Aguardando..." />
+    return () => {
+      clearInterval(interval);
     }
-    return (<div className="container">
-              <Header>Votação</Header>
-              <Candidates candidates={candidates} />
-            </div>);
+  }, [candidates]);
+
+  if(candidates.length ===0){
+    return <Spinner description="Aguardando..." />
   }
+  return (<div className="container">
+            <Header>Votação</Header>
+            <Candidates candidates={candidates} />
+          </div>);
 }

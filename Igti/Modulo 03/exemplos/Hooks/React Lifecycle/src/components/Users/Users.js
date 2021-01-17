@@ -1,12 +1,18 @@
-import React, { Component, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import User from './User';
 
 export default function Users({users}) {
   const [ secondsVisible, setSecondsVisible ] = useState(0);
 
-  // componentWillUnmount() {
-  //   clearInterval(this.interval);
-  // } 
+  useEffect(() => {
+    const interval = setInterval(() => {
+       setSecondsVisible(secondsVisible + 1);
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    }
+  }, [secondsVisible]);
+
   return (
     <div>
       <p>Componente Users exibido por {secondsVisible} segundos</p>
