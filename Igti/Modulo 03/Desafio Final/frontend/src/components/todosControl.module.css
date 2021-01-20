@@ -1,0 +1,31 @@
+div {
+  border: 0px;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  margin-top: -10px;
+}
+
+.tdDone {
+  font-weight: bold;
+  color: white;
+  border: 0px;
+  border-left-width: 0;
+  min-width: 120px;
+  height: 18px;
+  background-color: rgb(128, 179, 132);
+  cursor: pointer;
+}
+
+.tdNoDone {
+  font-weight: bold;
+  color: white;
+  border: 0px;
+  border-left-width: 0;
+  min-width: 120px;
+  height: 18px;
+  background-color: rgb(212, 149, 159);
+  cursor: pointer;
+}
