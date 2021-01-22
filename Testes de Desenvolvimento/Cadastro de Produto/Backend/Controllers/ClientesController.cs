@@ -10,64 +10,64 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    [Route("api/Clientes")]
+    [Route("api/Categorias")]
     [ApiController]
-    public class ClientesController : ControllerBase
+    public class CategoriasController : ControllerBase
     {
         private readonly WebApiContext _context;
 
-        public ClientesController(WebApiContext context)
+        public CategoriasController(WebApiContext context)
         {
             _context = context;
         }
 
-        // GET: api/Clientes
+        // GET: api/Categorias
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<Categoria>>> GetCategorias()
         {
-            return await _context.Clientes.ToListAsync();
+            return await _context.Categorias.ToListAsync();
         }
 
-        // GET: api/Clientes/5
+        // GET: api/Categorias/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> GetCliente(long id)
+        public async Task<ActionResult<Categoria>> GetCategoria(long id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
+            var Categoria = await _context.Categorias.FindAsync(id);
 
-            if (cliente == null)
+            if (Categoria == null)
             {
                 return NotFound();
             }
 
-            return cliente;
+            return Categoria;
         }
 
-        // GET: api/Cliente/buscar/rickjf@2001@yahoo.com.br
-        [HttpGet("buscar/{e_mail}")]
-        public async Task<ActionResult<Cliente>> SearchCliente(string e_mail)
+        // GET: api/Categoria/buscar/Frios
+        [HttpGet("buscar/{nome}")]
+        public async Task<ActionResult<Categoria>> SearchCategoria(string nome)
         {
-            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.e_mail == e_mail);
+            var Categoria = await _context.Categorias.FirstOrDefaultAsync(c => c.Nome == nome);
 
-            if (cliente == null)
+            if (Categoria == null)
             {
                 return NotFound();
             }
 
-            return cliente;
+            return Categoria;
         }
 
-        // PUT: api/Clientes/5
+        // PUT: api/Categorias/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCliente(long id, Cliente cliente)
+        public async Task<IActionResult> PutCategoria(long id, Categoria Categoria)
         {
-            if (id != cliente.Id)
+            if (id != Categoria.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(cliente).State = EntityState.Modified;
+            _context.Entry(Categoria).State = EntityState.Modified;
 
             try
             {
@@ -75,7 +75,7 @@ namespace WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClienteExists(id))
+                if (!CategoriaExists(id))
                 {
                     return NotFound();
                 }
@@ -88,37 +88,37 @@ namespace WebApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Clientes
+        // POST: api/Categorias
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
+        public async Task<ActionResult<Categoria>> PostCategoria(Categoria Categoria)
         {
-            _context.Clientes.Add(cliente);
+            _context.Categorias.Add(Categoria);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCliente), new { id = cliente.Id }, cliente);
+            return CreatedAtAction(nameof(GetCategoria), new { id = Categoria.Id }, Categoria);
         }
 
-        // DELETE: api/Clientes/5
+        // DELETE: api/Categorias/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Cliente>> DeleteCliente(long id)
+        public async Task<ActionResult<Categoria>> DeleteCategoria(long id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
+            var Categoria = await _context.Categorias.FindAsync(id);
+            if (Categoria == null)
             {
                 return NotFound();
             }
 
-            _context.Clientes.Remove(cliente);
+            _context.Categorias.Remove(Categoria);
             await _context.SaveChangesAsync();
 
-            return cliente;
+            return Categoria;
         }
 
-        private bool ClienteExists(long id)
+        private bool CategoriaExists(long id)
         {
-            return _context.Clientes.Any(e => e.Id == id);
+            return _context.Categorias.Any(e => e.Id == id);
         }
     }
 }
