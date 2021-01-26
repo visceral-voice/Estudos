@@ -1,0 +1,74 @@
+[{
+  "_id": {
+    "$oid": "600b47d23ad28a895b7fb187"
+  },
+  "name": "Maria dos Anjos",
+  "lastModifided": {
+    "$date": "2021-01-24T15:24:29.113Z"
+  },
+  "subject": "Historia",
+  "type": "Prova Final",
+  "value": 34.5
+},{
+  "_id": {
+    "$oid": "600b54c43ad28a895b7fb188"
+  },
+  "name": "Maria Aparecida",
+  "subject": "Matematica",
+  "type": "Trabaçho Prático",
+  "value": 15.4,
+  "lastModifided": {
+    "$date": "2021-01-24T15:07:59.632Z"
+  }
+},{
+  "_id": {
+    "$oid": "600b54c43ad28a895b7fb189"
+  },
+  "name": "Maria Luiza",
+  "subject": "Português",
+  "type": "Prova Final",
+  "value": 23.8,
+  "lastModifided": {
+    "$date": "2021-01-24T15:07:59.632Z"
+  }
+},{
+  "_id": {
+    "$oid": "600b55bf3ad28a895b7fb18a"
+  },
+  "name": "Pedro Augusto",
+  "subject": "Historia",
+  "lastModifided": {
+    "$date": "2021-01-24T15:07:59.633Z"
+  }
+},{
+  "_id": {
+    "$oid": "600b563b3ad28a895b7fb18b"
+  },
+  "name": "Pedro Paulo",
+  "subject": "Matematica",
+  "type": "Trabalho Prático",
+  "value": 18.9,
+  "lastModifided": {
+    "$date": "2021-01-24T15:07:59.633Z"
+  }
+},{
+  "_id": {
+    "$oid": "600b563b3ad28a895b7fb18c"
+  },
+  "name": "Maria dos Anjos",
+  "subject": "Historia",
+  "type": "Prova Final",
+  "value": 34.5,
+  "datemodifided": "$$NOW"
+},{
+  "_id": {
+    "$oid": "600f0447211eb83064521576"
+  },
+  "name": "Andre Soares",
+  "subject": "Matematica",
+  "type": "Trabalho Prático",
+  "value": 18.9,
+  "lastModifided": {
+    "$date": "2021-01-24T15:07:59.632Z"
+  }
+}]

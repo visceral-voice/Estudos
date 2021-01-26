@@ -1,0 +1,109 @@
+mongod --dbpath "D:\Estudos\Igti\Modulo 04\Data"
+mongo -host localhost:27017
+use grades
+db.createCollection("log", { capped : true, size : 1024, max : 10 } )
+
+db.student.insertOne({name: "Maria doa Anjos"});
+db.student.insertMany([{name: "Maria Aparecida", subject: "Matematica", type: "Trabaçho Prático", value: 15.4}, {name: "Maria Luiza", subject: "Português", type: "Prova Final", value: 23.8}]);
+db.student.insert({name: "Pedro Augusto", subject: "Historia"})
+db.student.insert([{name: "Pedro Paulo", subject: "Matematica", type: "Trabalho Prático", value: 18.9}, {name: "Luiz Ricardo", subject: "Português", type: "Prova Final", value: 24.3}]);
+
+
+db.student.find()
+db.student.find({}, {_id:0, name:1, value:1})
+db.student.find({}, {_id:0, name:1, value:1}).limit(4)
+db.student.find({}, {_id:0, name:1, value:1}).limit(4).skip(1)
+db.student.find({}, {_id:0, name:1, value:1}).sort({name:1})
+db.student.find({}, {_id:0, name:1, value:1}).sort({name:-1})
+db.student.find().pretty()
+db.student.findOne()
+db.student.find({subject: "Português"}, {_id:0}).pretty()
+$and:[{subject: "Português"}, {type: "Prova Final"}]
+$not
+$nor:[{subject: "Português"}, {type: "Prova Final"}]
+$or:[{subject: "Português"}, {type: "Prova Final"}]
+db.student.find({$and:[{subject: "Português"}, {type: "Prova Final"}]}, {_id:0}).pretty()
+$eq (equal)
+$gt (greather than)
+$gte (greather than equal)
+$in (in)
+$lt (less than)
+$lte (less than equal)
+$ne (not equal)
+$nin (not in)
+db.student.find({value: {$gt: 20}}, {_id:0}).pretty()
+
+
+db.student.updateOne({name: "Luiz Ricardo", subject: "Português"},{$set: {type: "Trabalho Prático"}})
+db.student.updateOne({name: "Maria doa Anjos"},{$set: {name: "Maria dos Anjos"}})
+db.student.updateOne({name: "Luiz Ricardo", subject: "Português"},{$inc: {value: 8}})
+db.student.updateMany({},{$currentDate: {lastModifided: true, timestamp: {$type: "timestamp"}}})
+db.student.updateMany({},{$unset: {timestamp: 1}})
+db.student.updateOne({name: "Maria dos Anjos"},{$set: {subject: "Historia", type: "Prova Final", value: 34.50}})
+db.student.updateOne({name: "Maria dos Anjos"},{$currentDate: {lastModifided: true}})
+
+db.student.replaceOne({_id : ObjectId("600b563b3ad28a895b7fb18c")}, {name: "Maria dos Anjos"},{subject: "Historia", type: "Prova Final", value: 34.50, datemodifided: "$$NOW"}})
+
+db.student.deleteOne({})
+db.student.deleteMany({})
+
+db.student.bulkWrite([])
+db.student.bulkWrite([{insertOne: {
+					   "document" : {name: "Tiago Peixoto", subject: "Fisica", type: "Prova Final", value: 16, timestamp: new Date()}}},
+					   {insertOne: {
+					   "document" : {name: "Patricia Rafaela", subject: "Português", type: "Trabalho Prático", value: 21.3, timestamp: new Date()}}},
+					   {updateOne: {
+									"filter": {name: "Maria dos Anjos"},
+									"update": {$set: {subject: "Historia"}}}},
+						{deleteOne: {
+									"filter": {name: "Luiz Ricardo", subject: "Português"}}},
+						{replaceOne: {
+									"filter": {_id : ObjectId("600b563b3ad28a895b7fb18c"}},
+									{"replacement"}: {name: "Tais de Souza", subject: "Fisica", type: "Trabalho Prático", value: 12, lastModifided: new Date()}
+									}
+						])
+
+
+
+db.student.getIndexes()
+db.student.createIndex({name: -1})
+db.student.dropIndex({name: 1})
+db.student.dropIndexes()
+db.student.createIndex({name: "text"})
+db.student.find({$text: {$search: "Maria Patricia"}})
+
+
+db.COLLECTION.aggregate([
+{$project: {}},
+{$match: {campo: "X"}},
+{$group: {_id: "$campo", total: {$sum: "$campo"}}},
+{$sort: {campo1: 1, campo2: -1}},
+{$skip: N},
+{$limit: N}
+])
+
+db.student.aggregate([
+{$match: {subject: "Matematica"}},
+{$group: {_id: null, total:{$sum: "$value"}}}
+])
+db.student.aggregate([
+{$group: {_id: {subject: "$subject", type: "$type"}, total:{$sum: "$value"}}},
+{$sort: {_id: 1}}
+])
+
+db.COLLECTION.count(query)
+db.student.count({subject: "Matematica"})
+db.student.countDocuments(query)
+db.student.countDocuments({subject: "Historia"})
+
+db.COLLECTION.distinct(field, query)
+db.student.distinct("subject")
+
+
+mongodb+srv://srpp-user-igti:01201073@grades.vi901.mongodb.net/grades?retryWrites=true&w=majority
+Instaladores Node
+npm init -y
+npm install mongodb
+npm install mongoose
+npm install express mongoose
+node --experimental-modules app.js (debugger)
