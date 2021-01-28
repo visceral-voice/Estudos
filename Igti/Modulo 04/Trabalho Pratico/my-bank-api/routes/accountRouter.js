@@ -4,12 +4,12 @@ import { accountModel } from "../models/accountModel.js";
 
 const app = express();
 
-const LOCAL = "mongodb://localhost/my-bank-api";
-//const ATLAS = "mongodb+srv://srpp-user-igti:01201073@grades.vi901.mongodb.net/grades?retryWrites=true&w=majority";
+//const LOCAL = "mongodb://localhost/my-bank-api";
+const ATLAS = "mongodb+srv://srpp-user-igti:01201073@grades.vi901.mongodb.net/my-bank-api?retryWrites=true&w=majority";
 
 async function conectBank(){
   try {
-    await mongoose.connect(LOCAL, {
+    await mongoose.connect(ATLAS, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
@@ -48,6 +48,78 @@ app.get("/accounts", async (req, res) => {
       const account = await accountModel.find({});
       desConectBank();
       res.send(account);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//Numero 06
+app.get("/saldo", async (req, res) => {
+  try {
+    const agencia = req.body.agencia;
+    const conta = req.body.conta;
+    conectBank();
+    const account = await accountModel.find({$and:
+                                            [{agencia: agencia}, 
+                                            {conta: conta}]});
+    if (account.length === 0){
+      res.status(400).send("Conta e agencia não encontrados");
+    } else {
+      res.send(`O saldo da conta ${account[0].conta} da agência ${account[0].agencia} é ${account[0].balance}`);
+    }
+    desConectBank();
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//Numero 09
+app.get("/media/:agencia", async (req, res) => {
+  try {
+    const agencia = req.params.agencia;
+    conectBank();
+    const account = await accountModel.findOne({agencia: agencia});
+    if (!account){
+      res.status(400).send("Agência não encontrada");
+    } else {
+      const filter = parseInt(agencia);
+      const result = await accountModel.aggregate([
+        { $match: { agencia: filter } },
+        { $group: { _id: '$agencia', media: { $avg: '$balance' }}}
+      ]);
+      res.send(`O saldo médio da agência ${agencia} é de ${result[0].media}`);
+    }
+    desConectBank();
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//Numero 10
+app.get("/menor/:qtde", async (req, res) => {
+  try {
+    const qtde = parseInt(req.params.qtde);
+    conectBank();
+    const account = await accountModel.find({}, {_id: 0, name: 0}).
+                                       sort({balance: 1}).
+                                       limit(qtde);
+    desConectBank();
+    res.send(account);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//Numero 11
+app.get("/maior/:qtde", async (req, res) => {
+  try {
+    const qtde = parseInt(req.params.qtde);
+    conectBank();
+    const account = await accountModel.find({}, {_id: 0}).
+                                       sort({balance: -1, name: 1}).
+                                       limit(qtde);
+    desConectBank();
+    res.send(account);
   } catch (err) {
     res.status(500).send(err);
   }
@@ -149,20 +221,23 @@ app.patch("/trf", async (req, res) => {
   }
 });
 
-//Numero 06
-app.get("/saldo", async (req, res) => {
+//Numero 12
+app.put("/private", async (req, res) => {
   try {
-    const agencia = req.body.agencia;
-    const conta = req.body.conta;
     conectBank();
-    const account = await accountModel.find({$and:
-                                            [{agencia: agencia}, 
-                                            {conta: conta}]});
-    if (account.length === 0){
-      res.status(400).send("Conta e agencia não encontrados");
-    } else {
-      res.send(`O saldo da conta ${account[0].conta} da agência ${account[0].agencia} é ${account[0].balance}`);
-    }
+    const accounts = await accountModel.aggregate([
+          { $group: { _id: '$agencia', saldo: { $max: '$balance' }}}
+    ]);
+    for(let c = 0; c < accounts.length; c++) {
+      await accountModel.findOneAndUpdate({$and:
+                                          [{agencia: accounts[c]._id}, 
+                                           {balance: accounts[c].saldo}]},
+                                           {agencia: 99});
+    };
+
+    const retorno = await accountModel.find({agencia: 99});
+
+    res.send(retorno);
     desConectBank();
   } catch (err) {
     res.status(500).send(err);

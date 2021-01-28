@@ -107,3 +107,5 @@ npm install mongodb
 npm install mongoose
 npm install express mongoose
 node --experimental-modules app.js (debugger)
+
+(dotenv - pacote para centralizar as variaveis)
