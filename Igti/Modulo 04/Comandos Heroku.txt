@@ -1,0 +1,17 @@
+Heroku
+
+Heroku CLI
+
+heroku login
+heroku create
+heroku apps:rename 
+
+Procfile
+
+git remote -v
+
+git push heroku
+
+heroku logs
+
+heroku restart

@@ -1,1 +1,34 @@
+git config --list
+git config --system (Todos os usuários)
+git config --global (o usuario logado)
+git config --local (por projeto)
+
 git init
+git clone
+git add => git commit
+git commit -a
+
+git checkout
+git checkout HEAD
+
+git diff
+git diff HEAD
+
+
+git status
+git log
+
+git commit --amend -m "" (Adiciona comentarios ao ultimo commit)
+
+gitk (abre visualização gráfica)
+
+git branch (mostra o branch atual)
+
+git checkout -b "Novo nome do branch" (Cria novo branch)
+git checkout "Nome do branch" (Altera o branch)
+
+git merge "Nome do branch" (Realiza merge do branch atual com o branch especificado)
+
+git branch -d "Nome do branch" (remove o branch)
+
+git remote add origin link para o diretorio remoto
