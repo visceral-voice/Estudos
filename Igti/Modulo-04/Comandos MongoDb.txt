@@ -1,4 +1,4 @@
-mongod --dbpath "D:\Estudos\Igti\Modulo 04\Data"
+mongod --dbpath "D:\MongoDB\Data"
 mongo -host localhost:27017
 use grades
 db.createCollection("log", { capped : true, size : 1024, max : 10 } )
