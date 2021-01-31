@@ -15,6 +15,7 @@ const GradeList = () => {
   const onChangeSearchName = (e) => {
     const searchName = e.target.value;
     setSearchName(searchName);
+    findByName();
   };
 
   const retrieveGrade = () => {
@@ -37,6 +38,7 @@ const GradeList = () => {
   const setActiveGrade = (grade, index) => {
     setCurrentGrade(grade);
     setCurrentIndex(index);
+    console.log(currentGrade);
   };
 
   const removeAllGrade = () => {
@@ -135,7 +137,7 @@ const GradeList = () => {
             </div>
 
             <Link
-              to={'/grade/' + currentGrade.id}
+              to={'/grade/' + currentGrade._id}
               className="badge badge-warning"
             >
               Edit
