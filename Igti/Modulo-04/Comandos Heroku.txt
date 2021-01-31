@@ -1,0 +1,20 @@
+Heroku
+
+Heroku CLI
+
+heroku login
+heroku create
+heroku apps:rename Novo nome			Velho nome
+heroku apps:rename grades-backend --app warm-eyrie-87766
+
+Procfile
+(web: node -r dotenv/config --experimental-modules app.js)
+(web: node app.js)
+
+git remote -v
+
+git push heroku
+
+heroku logs
+
+heroku restart
