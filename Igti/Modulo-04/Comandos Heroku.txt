@@ -1,10 +1,11 @@
 Heroku
 
-Heroku CLI
+Heroku CLI (Instalar)
 
 heroku login
 heroku create
-heroku apps:rename Novo nome			Velho nome
+heroku apps:rename Novo nome
+heroku apps:rename Novo nome	  --app	Velho nome
 heroku apps:rename grades-backend --app warm-eyrie-87766
 
 Procfile
