@@ -16,6 +16,19 @@ git remote -v
 
 git push heroku
 
-heroku logs
+heroku logs --tail
 
 heroku restart
+
+
+Subir uma aplicação React
+rodar "npm install --save serve" no terminal
+substituir tag "scripts" pelo conteudo abaixo:
+  "scripts": {
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
+  }

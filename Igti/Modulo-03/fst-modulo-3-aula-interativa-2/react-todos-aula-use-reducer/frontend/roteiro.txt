@@ -1,0 +1,58 @@
+Módulo 03 - Desafio - roteiro
+=============================
+
+(x) Extrair projeto-base
+(x) Converter App.js para functional component
+(x) Remover componente <ProjetoBase />
+
+(x) App.js
+   (x) Criar título
+   (x) useEffect para trocar título da aba
+
+(x) api.js 
+   (x) Criar api/api.js
+   (x) Criar arrays para anos e meses e funções
+      para obtê-los com "export". Utilizar o 
+      formato {id, description, value} em ambos
+
+() Select.js
+   (x) Criar componente Select com base no Materialize 
+      para comportar os anos e meses. Utilizar as props
+      { values, selectedValue, onChange }. Mostrar que 
+      o Materialize é "chato" quanto ao <select>.
+      Ou ativamos o JavaScript com M ou usamos a classe
+      "browser-default".
+      
+      Documentação do React:
+      https://reactjs.org/docs/forms.html#the-select-tag
+
+      Documentação do Materialize:
+      https://materializecss.com/select.html
+
+  (x) Utilizar <Select> em App.js para anos e meses. 
+     Criar state para 
+     ano e mês selecionados (selectedYear, selectedMonth).
+     Implementar onChange e testar se está funcionando
+
+(x) api.js 
+   (x) Criar função apiGetTodos(year, month) para obter dados 
+      da API. Testar retorno em App.js. Garantir que os 
+      dados estão ordenados por data 
+
+(x) Todos.js 
+   (x) Criar componente <Todos> para servir de container para 
+      todos os "todos" filtrados, utilizando children
+
+() Todo.js 
+   (x) Criar componente <Todo> para servir de item para 
+      cada todo
+   () Criar helper para formatar data para DD/MM/YYYY
+   (x) Estilizar <Todos> e <Todo>
+
+() App.js
+   () Implementar Summary
+   () Implementar onToggle para cumprir/descumprir tarefa
+      persistindo no backend
+
+() Se der tempo:
+   () Converter o app para utilizar useReducer

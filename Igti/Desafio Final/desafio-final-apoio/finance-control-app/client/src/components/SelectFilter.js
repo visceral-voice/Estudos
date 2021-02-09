@@ -9,29 +9,45 @@ export default function SelectFilter({ YearMonth, onChange }) {
     M.AutoInit();
   }, []);
 
+  function defaultValue() {
+    let today = new Date();
+    const YearMonthSelect =
+      (today.getMonth() + 1).toString() + today.getFullYear().toString();
+    if (!YearMonth) {
+      return YearMonthSelect;
+    } else {
+      return YearMonth;
+    }
+  }
+
+  const setValue = (value) => {
+    setMyValue(value);
+  };
+
   const handleSelectChange = ({ target }) => {
     const newValue = target.value;
+    setValue(newValue);
     onChange(newValue);
   };
 
   return (
-    <div style={styles.flexRow} className="input-field col s6">
-      <select onChange={handleSelectChange} defaultValue={YearMonth}>
-        <option selected value={YearMonth}>
-          {YearMonth}
-        </option>
+    <div style={styles.flexRow} className="input-field row">
+      <button className="btn waves-effect waves-light">&lt;</button>
+      <select value={defaultValue()} onChange={handleSelectChange}>
         {api.CONST_YEARS.map((year) => {
           return api.CONST_MONTHS.map((month, index) => {
             const valueFilter = (index + 1).toString() + year.toString();
+            const displayFilter = api.yearMonthDisplay(valueFilter);
             return (
               <option key={valueFilter} value={valueFilter}>
                 {' '}
-                {` ${month}/${year} `}{' '}
+                {displayFilter}
               </option>
             );
           });
         })}
       </select>
+      <button className="btn waves-effect waves-light">&gt;</button>
     </div>
   );
 }
@@ -40,8 +56,7 @@ const styles = {
   flexRow: {
     display: 'flex',
     flexDirection: 'row',
-    alignItens: 'center',
     justifyContent: 'center',
-    wiidth: '300px',
+    alignItems: 'center',
   },
 };

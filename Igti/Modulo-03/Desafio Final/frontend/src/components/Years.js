@@ -1,7 +1,7 @@
 import React from 'react'
 import * as api from "../api/apiService";
 
-export default function Years({onActionCLick}) {
+export default function Years({ onActionCLick, yearToDo }) {
   function handleCLick (year) {
     onActionCLick(year);
   }
@@ -10,7 +10,12 @@ export default function Years({onActionCLick}) {
         {api.CONST_YEARS.map(year => {
           return (
           //<span key={year} id={year} onClick={() => handleCLick(year)} style={styles.divBox}>{year}</span>
-          <button key={year} id={year} onClick={() => handleCLick(year)} style={styles.divBox}>{year}</button>
+          <button key={year} 
+                  id={year} 
+                  onClick={() => handleCLick(year)} 
+                  style={yearToDo === year ? styles.divClickBox : styles.divBox}>
+            {year}
+          </button>
           );
         })}
     </div>

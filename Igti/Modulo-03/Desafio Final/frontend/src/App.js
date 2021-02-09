@@ -44,6 +44,7 @@ export default function App() {
             <div>
                 <Years 
                   onActionCLick={handleYearClick}
+                  yearToDo={yearTodo}
                 />
             </div>
             <br />
@@ -51,6 +52,7 @@ export default function App() {
             <div>
                 <Months 
                   onActionCLick={handleMonthClick}
+                  monthToDo={monthTodo}
                 />
             </div>            
             <br />

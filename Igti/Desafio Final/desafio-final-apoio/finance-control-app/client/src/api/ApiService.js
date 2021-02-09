@@ -2,21 +2,35 @@ import axios from 'axios';
 
 const CONST_YEARS = [2019, 2020, 2021];
 const CONST_MONTHS = [
-  'JAN',
-  'FEV',
-  'MAR',
-  'ABR',
-  'MAI',
-  'JUN',
-  'JUL',
-  'AGO',
-  'SET',
-  'OUT',
-  'NOV',
-  'DEZ',
+  'Jan',
+  'Fev',
+  'Mar',
+  'Abr',
+  'Mai',
+  'Jun',
+  'Jul',
+  'Ago',
+  'Set',
+  'Out',
+  'Nov',
+  'Dez',
 ];
 
-const API_URL = 'http://localhost:3001/api/transactions';
+function yearMonthDisplay(filterMonthYear) {
+  let displays = '';
+  if (filterMonthYear.length === 6) {
+    displays = `${
+      CONST_MONTHS[filterMonthYear.substring(0, 2) - 1]
+    }/${filterMonthYear.substring(2)}`;
+  } else {
+    displays = `${
+      CONST_MONTHS[filterMonthYear.substring(0, 1) - 1]
+    }/${filterMonthYear.substring(1)}`;
+  }
+  return displays;
+}
+
+const API_URL = 'http://localhost:3001/api/transaction';
 
 async function getFilterTransactions(filterMonthYear) {
   let filterMonth = '';
@@ -41,4 +55,4 @@ async function getFilterTransactions(filterMonthYear) {
   return filterTransactions;
 }
 
-export { CONST_YEARS, CONST_MONTHS, getFilterTransactions };
+export { CONST_YEARS, CONST_MONTHS, getFilterTransactions, yearMonthDisplay };

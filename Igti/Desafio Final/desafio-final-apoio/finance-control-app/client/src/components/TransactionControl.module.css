@@ -1,0 +1,59 @@
+div {
+  border: 0px;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  margin-top: -10px;
+  font-family: sans-serif;
+}
+
+.tdReceita {
+  border: 0px;
+  border-left-width: 0;
+  min-width: 120px;
+  height: 18px;
+  background-color: #63cdda;
+}
+
+.tdDespesa {
+  border: 0px;
+  border-left-width: 0;
+  min-width: 120px;
+  height: 18px;
+  background-color: #f78fb3;
+}
+
+.day {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.category {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.value {
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  text-align: center;
+}
+
+.icon {
+  cursor: pointer;
+}
