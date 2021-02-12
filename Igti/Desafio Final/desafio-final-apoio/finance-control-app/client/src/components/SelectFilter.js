@@ -30,10 +30,31 @@ export default function SelectFilter({ YearMonth, onChange }) {
     onChange(newValue);
   };
 
+  const moveSelect = (event) => {
+    const operation = event.currentTarget.id;
+    const select = document.getElementById('filterMonthYear');
+    const index = select.selectedIndex;
+    if (operation === 'subtractSelect') {
+      select.selectedIndex = index - 1;
+    } else {
+      select.selectedIndex = index + 1;
+    }
+    const newValue = select.options[select.selectedIndex].value;
+    setValue(newValue);
+    onChange(newValue);
+  };
+
   return (
     <div style={styles.flexRow} className="input-field row">
-      <button className="btn waves-effect waves-light">&lt;</button>
-      <select value={defaultValue()} onChange={handleSelectChange}>
+      <button className="btn" id="subtractSelect" onClick={moveSelect}>
+        &lt;
+      </button>
+      <select
+        value={defaultValue()}
+        onChange={handleSelectChange}
+        className="browser-default"
+        id="filterMonthYear"
+      >
         {api.CONST_YEARS.map((year) => {
           return api.CONST_MONTHS.map((month, index) => {
             const valueFilter = (index + 1).toString() + year.toString();
@@ -47,7 +68,9 @@ export default function SelectFilter({ YearMonth, onChange }) {
           });
         })}
       </select>
-      <button className="btn waves-effect waves-light">&gt;</button>
+      <button className="btn" id="addSelect" onClick={moveSelect}>
+        &gt;
+      </button>
     </div>
   );
 }
@@ -58,5 +81,6 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    width: '200px',
   },
 };

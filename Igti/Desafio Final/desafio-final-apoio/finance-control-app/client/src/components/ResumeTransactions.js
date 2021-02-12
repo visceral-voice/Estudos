@@ -50,7 +50,7 @@ const styles = {
     flexDirection: 'row',
     alignItens: 'center',
     border: '1px solid gray',
-    borderRadius: '10px',
+    borderRadius: '8px',
     justifyContent: 'space-between',
   },
 };

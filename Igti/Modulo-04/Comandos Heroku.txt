@@ -20,6 +20,12 @@ heroku logs --tail
 
 heroku restart
 
+git init
+heroku git:remote -a "nome-do-seu-projeto"
+git add .
+git commit -m "heroku"
+git push heroku master
+
 
 Subir uma aplicação React
 rodar "npm install --save serve" no terminal

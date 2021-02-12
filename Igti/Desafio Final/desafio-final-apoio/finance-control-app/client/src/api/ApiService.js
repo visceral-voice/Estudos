@@ -55,4 +55,31 @@ async function getFilterTransactions(filterMonthYear) {
   return filterTransactions;
 }
 
-export { CONST_YEARS, CONST_MONTHS, getFilterTransactions, yearMonthDisplay };
+async function deleteTransaction(transaction) {
+  const res = await axios.delete(`${API_URL}/${transaction._id}`);
+  return res;
+}
+
+async function updateTransaction(transaction) {
+  const res = await axios.put(`${API_URL}/${transaction._id}`, transaction, {
+    'Content-Type': 'application/json',
+  });
+  return res;
+}
+
+async function createTransaction(transaction) {
+  const res = await axios.post(API_URL, transaction, {
+    'Content-Type': 'application/json',
+  });
+  return res;
+}
+
+export {
+  CONST_YEARS,
+  CONST_MONTHS,
+  getFilterTransactions,
+  yearMonthDisplay,
+  updateTransaction,
+  deleteTransaction,
+  createTransaction,
+};
