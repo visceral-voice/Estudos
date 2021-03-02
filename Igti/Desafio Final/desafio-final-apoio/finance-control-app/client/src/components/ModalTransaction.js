@@ -96,12 +96,15 @@ export default function ModalTransaction({
     setTDescription(event.currentTarget.value);
   };
 
-  const handleDateChanged = (event) => {
-    setTYearMonthDay(transformDate(event));
+  const handleDateChanged = async (event) => {
+    console.log(event);
+    await setTYearMonthDay(transformDate(event));
+    console.log(tYearMonthDay);
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    console.log(tYearMonthDay);
     const parts = tYearMonthDay.split('-');
     const month =
       parts[0].length === 1 ? '0' + parts[0].toString() : parts[0].toString();

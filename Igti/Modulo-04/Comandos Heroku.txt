@@ -38,3 +38,8 @@ substituir tag "scripts" pelo conteudo abaixo:
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
   }
+
+
+https://visceral-grades-app.herokuapp.com/
+https://visceral-grades-api.herokuapp.com/
+https://visceral-finance-control-app.herokuapp.com/

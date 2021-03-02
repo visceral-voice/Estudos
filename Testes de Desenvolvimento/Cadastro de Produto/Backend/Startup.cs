@@ -46,7 +46,14 @@ namespace WebApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("https://localhost:5001")
+                       .AllowCredentials()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            });
 
             app.UseEndpoints(endpoints =>
             {

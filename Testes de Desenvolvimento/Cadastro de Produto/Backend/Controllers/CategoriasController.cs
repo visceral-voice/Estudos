@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -42,7 +43,7 @@ namespace WebApi.Controllers
             return Categoria;
         }
 
-        // GET: api/Categoria/buscar/Frios
+        // GET: api/Categoria/buscar/frios
         [HttpGet("buscar/{nome}")]
         public async Task<ActionResult<Categoria>> SearchCategoria(string nome)
         {
@@ -62,6 +63,9 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategoria(long id, Categoria Categoria)
         {
+            System.Diagnostics.Debug.WriteLine("Id = " + id);
+            System.Diagnostics.Debug.WriteLine("CategoriaId = " + Categoria.Id);
+
             if (id != Categoria.Id)
             {
                 return BadRequest();
