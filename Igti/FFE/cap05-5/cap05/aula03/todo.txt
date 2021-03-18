@@ -1,0 +1,9 @@
+Capítulo 05 - Aula 03
+=====================
+
+Check ✓
+
+(✓) Acessar API com Fetch - https://api.github.com/users/rrgomide
+(✓) Criar promise para divisão de 2 números
+(✓) Testar e explicar .then() e .catch()
+(✓) Converter código para async/await
