@@ -7,9 +7,9 @@ namespace Frontend.Models
 {
     public class ProdutoPaginacao
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
         public string Nome { get; set; }
-        public string Categoria_Id { get; set; }
+        public long Categoria_Id { get; set; }
         public string Categoria_Nome { get; set; }
         public decimal Preco { get; set; }
         public IEnumerable<ProdutoViewModel> Produtos { get; set; }

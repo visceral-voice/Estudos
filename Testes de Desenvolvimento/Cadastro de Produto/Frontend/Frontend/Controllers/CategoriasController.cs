@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,29 +7,22 @@ using System.Web.Mvc;
 using Frontend.Models;
 using Frontend.Helpers;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.IO;
-using System.Web.Script.Serialization;
+using System.Net.Http.Headers;
 
 namespace Frontend.Controllers
 {
     public class CategoriasController : Controller
     {
-        static HttpClient client = new HttpClient();
         // GET: Categorias
-        public async Task<ActionResult> Index(string Pagina)
+        public async Task<ActionResult> Index(int? Pagina)
         {
             if (Pagina == null)
             {
-                Pagina = "1";
+                Pagina = 1;
             }
-            int page = Convert.ToInt32(Pagina);
-
             var client = WebApiHttpClient.GetClient();
-            client.BaseAddress = new Uri(client.BaseAddress + "Categorias");
-            client.Timeout = TimeSpan.FromMinutes(10);
-            HttpResponseMessage response = await client.GetAsync(client.BaseAddress);
+            HttpResponseMessage response = await client.GetAsync($"Categorias");
 
             if (response.IsSuccessStatusCode)
             {
@@ -40,7 +32,7 @@ namespace Frontend.Controllers
                 {
                     CatPorPagina = 5,
                     Categorias = categorias,
-                    PaginaAtual = page
+                    PaginaAtual = (int)Pagina
                 };
                 return View(categoriapaginacao);
 
@@ -66,17 +58,25 @@ namespace Frontend.Controllers
         {
             try {
 
-                Categoria_Salvar categoria = new Categoria_Salvar
+                //Categoria_Salvar categoria = new Categoria_Salvar
+                //{
+                //    Nome = Nome
+                //};
+
+                Categoria categoria = new Categoria
                 {
                     Nome = Nome
                 };
-                var client = WebApiHttpClient.GetClient(); 
-                string categoriaJSON = JsonConvert.SerializeObject(categoria); 
-                HttpContent content = new StringContent(categoriaJSON, System.Text.Encoding.Unicode, "application/json");
 
-                client.BaseAddress = new Uri(client.BaseAddress + "Categorias");
-                client.Timeout = TimeSpan.FromMinutes(10);
-                var response = await client.PostAsync(client.BaseAddress, content); 
+                var client = WebApiHttpClient.GetClient();
+                HttpResponseMessage response = await client.PostAsJsonAsync($"Categorias", categoria);
+
+                //string categoriaJSON = JsonConvert.SerializeObject(categoria); 
+                //HttpContent content = new StringContent(categoriaJSON, System.Text.Encoding.Unicode, "application/json");
+
+                ////client.BaseAddress = new Uri(client.BaseAddress + "Categorias");
+                //client.Timeout = TimeSpan.FromMinutes(10);
+                //var response = await client.PostAsync(client.BaseAddress, content); 
 
                 if (response.IsSuccessStatusCode) { 
                     return RedirectToAction("Index"); 
@@ -97,10 +97,9 @@ namespace Frontend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var client = WebApiHttpClient.GetClient();
-            client.BaseAddress = new Uri(client.BaseAddress + "Categorias/"+ id);
-            client.Timeout = TimeSpan.FromMinutes(10);
-            HttpResponseMessage response = await client.GetAsync(client.BaseAddress);
+            HttpResponseMessage response = await client.GetAsync($"Categorias/{id}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -122,42 +121,115 @@ namespace Frontend.Controllers
         // PUT: Categorias/Edit/5
         [HttpPut]
         [ValidateAntiForgeryToken]
-        public async Task<Categoria> Edit(Categoria categoria)
+        public async Task<ActionResult> Edit(Categoria categoria)
         {
             try
             {
-                //var client = WebApiHttpClient.GetClient();
-                //string categoriaJSON = JsonConvert.SerializeObject(categoria);
-                //HttpContent content = new StringContent(categoriaJSON, System.Text.Encoding.Unicode, "application/json");
-
-                //client.BaseAddress = new Uri(client.BaseAddress + "Categorias/" + categoria.Id);
-                //client.Timeout = TimeSpan.FromMinutes(10);
-                //var response = await client.PutAsJsonAsync(client.BaseAddress, content);
-                client.BaseAddress = new Uri("https://localhost:44396/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
+                var client = WebApiHttpClient.GetClient();
 
                 HttpResponseMessage response = await client.PutAsJsonAsync(
-                $"api/Categorias/{categoria.Id}", categoria);
+                $"Categorias/{categoria.Id}", categoria);
                 response.EnsureSuccessStatusCode();
 
-                return categoria;
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Content("Ocorreu um erro: " + response.StatusCode);
 
-                //if (response.IsSuccessStatusCode)
-                //{
-                //    return RedirectToAction("Index");
-                //}
-                //else
-                //{
-                //    return Content("Ocorreu um erro: " + response.StatusCode);
-
-                //}
+                }
             }
             catch
             {
-                //return Content("Ocorreu um erro.");
-                return categoria;
+                return Content("Ocorreu um erro.");
+            }
+        }
+
+        [HttpGet]
+        // DELETE: Categorias/5
+        public async Task<ActionResult> Delete(String id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var client = WebApiHttpClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync($"Categorias/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                Categoria categoria = JsonConvert.DeserializeObject<Categoria>(content);
+
+                if (categoria == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(categoria);
+            }
+            else
+            {
+                return Content("Ocorreu um erro: " + response.StatusCode);
+            }
+        }
+
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(Categoria categoria)
+        {
+            try
+            {
+                var client = WebApiHttpClient.GetClient();
+
+                HttpResponseMessage response = await client.DeleteAsync(
+                $"Categorias/{categoria.Id}");
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Content("Ocorreu um erro: " + response.StatusCode);
+
+                }
+            }
+            catch
+            {
+                return Content("Ocorreu um erro.");
+            }
+        }
+
+        [HttpGet]
+        // GET: Categorias/5
+        public async Task<ActionResult> Details(String id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var client = WebApiHttpClient.GetClient();
+            HttpResponseMessage response = await client.GetAsync($"Categorias/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                Categoria categoria = JsonConvert.DeserializeObject<Categoria>(content);
+
+                if (categoria == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(categoria);
+            }
+            else
+            {
+                return Content("Ocorreu um erro: " + response.StatusCode);
             }
         }
 

@@ -8,7 +8,7 @@ namespace Frontend.Models
     {
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
+        public long Id { get; set; }
         [Required]
         public string Nome { get; set; }
     }
