@@ -1,0 +1,6 @@
+Data Science
+
+Instalar Anaconda - anaconda.com
+Criar pasta vazia Google Drive 
+Utilizar o Google Colaboratory
+

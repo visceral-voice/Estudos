@@ -1,0 +1,73 @@
+Ambiente dos sonhos no Windows com WSL2 e VSCode
+	- https://github.com/codeedu/wsl2-docker-quickstart
+		wslconfig
+	- Windows Terminal
+	- oh my zsh no wsl 2 (https://www.youtube.com/redirect?event=live_chat&redir_token=QUFFLUhqa1c2NF9fanNIRWo3YURmYnYxRXY1REQwaENVQXxBQ3Jtc0tsX3hVRTdEd2tfQ2ROOEtZVHJHVC0wRTRUSmZxM05lbDg0czV2MEVvWmtNQnNBVVV5eFZSckU5aDdQV01WbV82TjNnN19VcUt0VFpYSzJ2bkhlQjJZNFo1QjN1d25NazdMX1B3NVdQZ1htRFIxR0dEYw&q=https%3A%2F%2Fdev.to%2Ferickrock80%2Fpt-br-instalando-oh-my-zsh-no-windows-terminal-3a8l)
+						 Tema: sobole
+	- Power Toys
+	- VSCode
+		Config Dist 
+		https://www.youtube.com/redirect?event=live_chat&redir_token=QUFFLUhqbEVoaFZJcUlRTUtXblRYb21jN2lxYjZydG4wd3xBQ3Jtc0ttd3c5M1N1MlR5NnAxWS1IdVlFNUV5R3BxT2hubW9ERmFzZjRqbFdaYkk0aW1iSnVfRGpBUjFOOVVOTDN6OWt6cVVuSW5Xa1dzQXhwMWQwV0JjR2pNalh0VTBvSlFHQTVIX1ltS0VaUlIwTGV1ejFDQQ&q=https%3A%2F%2Fgist.github.com%2Fargentinaluiz%2Ff134417fa4753064820b6ee2af194e55
+	- Acessar pelo Windows Explorer
+		\\wsl$
+		
+
+Docker e Portainer do zero: Containers em desenvolvimento
+	https://hub.docker.com/
+	
+	- docker 
+		docker run ubuntu
+		docker ps
+		docker run hello-world
+		docker ps -a
+		docker run nginx (Servidor Web)
+		docker run -p 8080:80 nginx (Servidor Web direcionando a porta local 8080 para a porta 80 do docker)
+		docker exec -it jolly_ [<-nome da iamgem] bash (entra na imagem do docker)
+		docker images
+		docker run -d -p 8080:80 nginx (Sobe o servidor sem travar o terminal)
+		sudo service docker status
+		sudo service docker start
+		
+	- Dockerfile
+		FROM nginx:latest
+		COPY html/* /usr/share/nginx/html
+	- Comando para criar a imagem
+		docker build -t visceral/nginx-fc-esquenta2 . (Busca os arquivos no mesmo diretorio)
+		comando criar parametro usuario Docker Hub/nome da imagem  indica que o Dockerfile está no mesmo diretório
+	- dockerhub
+		docker run -d -p 8080:80 wesleywillians/nginx-fc-esquenta2
+	- docker compose
+		docker-compose up -d (Subir)
+		docker-compose down (termina a execução do docker)
+	Exemplo: docker-compose.yaml
+		version: '3'
+		services:
+		  nginx:
+				image: nginx
+				volumes:
+				  - ./nginx:/usr/share/nginx/html/
+				ports:
+				  - 8080:80
+			redis:
+				image: redis:alpine
+				expose:
+				  - 6379
+				  
+	https://www.portainer.io/
+	
+React e TypeScript: Pontapé inicial do jeito certo
+	- https://github.com/nodesource/distributions/blob/master/README.md (Instalar Node.Js ubuntu)
+	- npx create-react-app --template typescript iniciando-react
+		code .
+		Dockerfile
+			FROM node:14.15.4-alpine3.12
+			USER node
+			WORKDIR /home/node/app
+			COPY . . (Copiando todo o projeto para dentro da imagem)
+			RUN npm install
+			ENTRYPOINT ["npm", "start"]
+		.dockerignore
+			/node-modules
+		docker build -t iniciando-react .
+		docker run -p 3000:3000 iniciando-react
+	- Preferencia por imagens alpine
