@@ -2,12 +2,14 @@ Ambiente dos sonhos no Windows com WSL2 e VSCode
 	- https://github.com/codeedu/wsl2-docker-quickstart
 		wslconfig
 	- Windows Terminal
-	- oh my zsh no wsl 2 (https://www.youtube.com/redirect?event=live_chat&redir_token=QUFFLUhqa1c2NF9fanNIRWo3YURmYnYxRXY1REQwaENVQXxBQ3Jtc0tsX3hVRTdEd2tfQ2ROOEtZVHJHVC0wRTRUSmZxM05lbDg0czV2MEVvWmtNQnNBVVV5eFZSckU5aDdQV01WbV82TjNnN19VcUt0VFpYSzJ2bkhlQjJZNFo1QjN1d25NazdMX1B3NVdQZ1htRFIxR0dEYw&q=https%3A%2F%2Fdev.to%2Ferickrock80%2Fpt-br-instalando-oh-my-zsh-no-windows-terminal-3a8l)
+	- oh my zsh no wsl 2 https://dev.to/erickrock80/pt-br-instalando-oh-my-zsh-no-windows-terminal-3a8l
 						 Tema: sobole
+	  Alterar o tema: code ~/.zshrc
+					ZSH_THEME="fino"
 	- Power Toys
 	- VSCode
 		Config Dist 
-		https://www.youtube.com/redirect?event=live_chat&redir_token=QUFFLUhqbEVoaFZJcUlRTUtXblRYb21jN2lxYjZydG4wd3xBQ3Jtc0ttd3c5M1N1MlR5NnAxWS1IdVlFNUV5R3BxT2hubW9ERmFzZjRqbFdaYkk0aW1iSnVfRGpBUjFOOVVOTDN6OWt6cVVuSW5Xa1dzQXhwMWQwV0JjR2pNalh0VTBvSlFHQTVIX1ltS0VaUlIwTGV1ejFDQQ&q=https%3A%2F%2Fgist.github.com%2Fargentinaluiz%2Ff134417fa4753064820b6ee2af194e55
+		https://gist.github.com/argentinaluiz/f134417fa4753064820b6ee2af194e55
 	- Acessar pelo Windows Explorer
 		\\wsl$
 		
@@ -22,7 +24,7 @@ Docker e Portainer do zero: Containers em desenvolvimento
 		docker ps -a
 		docker run nginx (Servidor Web)
 		docker run -p 8080:80 nginx (Servidor Web direcionando a porta local 8080 para a porta 80 do docker)
-		docker exec -it jolly_ [<-nome da iamgem] bash (entra na imagem do docker)
+		docker exec -it jolly_ [<-nome da imagem] bash (entra na imagem do docker)
 		docker images
 		docker run -d -p 8080:80 nginx (Sobe o servidor sem travar o terminal)
 		sudo service docker status
@@ -68,6 +70,36 @@ React e TypeScript: Pontapé inicial do jeito certo
 			ENTRYPOINT ["npm", "start"]
 		.dockerignore
 			/node-modules
+		Dockerfile II (Sem necessidade de ter a pasta node-modules no projeto da imagem)
+			FROM node:14.15.4-alpine3.12
+			USER node
+			WORKDIR /home/node/app
+			COPY . . (Copiando todo o projeto para dentro da imagem)
+			ENTRYPOINT [".docker/entrypoint.sh"]
+					entrypoint.sh (Liberar acesso ao arquivo chmod +x .docker/entrypoint.sh)
+						npm install
+						npm start
 		docker build -t iniciando-react .
-		docker run -p 3000:3000 iniciando-react
+		docker run -d -p 3000:3000 iniciando-react
+		docker stop [nome ou id da imagem]
+		docker run -p 3000:3000 -v $(pwd):/home/node/app iniciando-react (Atualiza o container em tempo real)
+		docker run -it -p 3000:3000 -v $(pwd):/home/node/app iniciando-react (habilita a interatividade do terminal)
+		docker exec it [nome ou id da imagem] /bin/sh (Entra na imagem do docker)
+		npm run build (Cria a versão para produção)
 	- Preferencia por imagens alpine
+	- Dicas
+		$(pwd) caminho atual linux
+
+Golang: Do zero ao Multithreading
+
+Interfaces de impacto com React e Material UI
+
+Apache Kafka: Streaming e mensageria das grandes empresas
+
+Desenvolvimento de APIs com Nest.js
+
+Kafka Connect: Integração entre sistemas na prática
+
+Tempo real com Nest.js e Websockets
+
+Kubernetes: Colocando dois microsserviços em produção
