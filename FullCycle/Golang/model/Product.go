@@ -4,7 +4,7 @@ import "github.com/satori/uuid"
 
 type Product struct {
 	ID   string
-	name string
+	Name string
 }
 
 type Products struct {
