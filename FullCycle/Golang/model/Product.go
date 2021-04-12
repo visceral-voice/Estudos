@@ -14,7 +14,8 @@ type Products struct {
 func (p *Products) Add(product Product) {
 	p.Product = append(p.Product, product)
 }
-func newProdutc() *Product {
+
+func NewProdutc() *Product {
 	return &Product{
 		ID: uuid.NewV4().String(),
 	}

@@ -1,4 +1,4 @@
-module github.com/visceral-voice/Estudos/fullcycle/golang
+module github.com/visceral-voice/Estudos/FullCycle/Golang
 
 go 1.16
 
