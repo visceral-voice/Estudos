@@ -96,7 +96,7 @@ Golang: Do zero ao Multithreading
 			go run main.go
 			go build main.go
 			goos=windows go build main.go (Gera o exe para o windows)
-			go mod init github.com/visceral-voice/Estudos/fullcycle/golang
+			go mod init github.com/visceral-voice/Estudos/FullCycle/Golang
 			go mod tidy
 
 Interfaces de impacto com React e Material UI

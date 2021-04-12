@@ -37,5 +37,7 @@ func main() {
 	// *nome2 = "FullCycle"
 	// fmt.Println(sergio.nome)
 
-	createProducts()
+	//createProducts()
+
+	CreateWebServer()
 }
