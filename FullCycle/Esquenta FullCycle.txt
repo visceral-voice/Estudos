@@ -91,6 +91,13 @@ React e TypeScript: Pontapé inicial do jeito certo
 		$(pwd) caminho atual linux
 
 Golang: Do zero ao Multithreading
+	- golang.org
+		main.go
+			go run main.go
+			go build main.go
+			goos=windows go build main.go (Gera o exe para o windows)
+			go mod init github.com/visceral-voice/Estudos/fullcycle/golang
+			go mod tidy
 
 Interfaces de impacto com React e Material UI
 
