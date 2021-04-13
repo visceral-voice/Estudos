@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 )
 
 type Pessoa struct {
@@ -17,27 +18,23 @@ func (p Pessoa) andou() (string, error) {
 }
 
 func main() {
-	// fmt.Println("Hello World!")
+	fmt.Println("Hello World!")
 
-	// sergio := Pessoa{
-	// 	nome:  "Sergio",
-	// 	idade: 47,
-	// }
-	// fmt.Println(sergio.nome)
-	// res, err := sergio.andou()
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-	// fmt.Println(res)
+	sergio := Pessoa{
+		nome:  "Sergio",
+		idade: 47,
+	}
+	fmt.Println(sergio.nome)
+	res, err := sergio.andou()
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(res)
 
-	// var nome2 *string    //(Cria varivael para apontar para endereço de memoria)
-	// nome2 = &sergio.nome //pega o endereco de memoria
-	// fmt.Println(nome2)
-	// fmt.Println(*nome2)
-	// *nome2 = "FullCycle"
-	// fmt.Println(sergio.nome)
-
-	//createProducts()
-
-	CreateWebServer()
+	var nome2 *string    //(Cria varivael para apontar para endereço de memoria)
+	nome2 = &sergio.nome //pega o endereco de memoria
+	fmt.Println(nome2)
+	fmt.Println(*nome2)
+	*nome2 = "FullCycle"
+	fmt.Println(sergio.nome)
 }

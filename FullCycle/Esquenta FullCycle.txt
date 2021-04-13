@@ -98,6 +98,9 @@ Golang: Do zero ao Multithreading
 			goos=windows go build main.go (Gera o exe para o windows)
 			go mod init github.com/visceral-voice/Estudos/FullCycle/Golang
 			go mod tidy
+		Post Pelo Terminal
+			Invoke-WebRequest -Uri http://localhost:8282/product -Method POST -Body (@{"name"= "Inserção do Produto Feliz";}|ConvertTo-Json) -ContentType "application/json"
+		Continuar 01:20:00
 
 Interfaces de impacto com React e Material UI
 

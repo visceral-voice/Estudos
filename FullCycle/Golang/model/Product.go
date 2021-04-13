@@ -3,8 +3,8 @@ package model
 import "github.com/satori/uuid"
 
 type Product struct {
-	ID   string
-	Name string
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
 
 type Products struct {

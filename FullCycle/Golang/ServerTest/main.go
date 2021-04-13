@@ -2,7 +2,7 @@ package main
 
 import "net/http"
 
-func CreateWebServer() {
+func main() {
 	http.HandleFunc("/product", ProductHandle)
 	http.ListenAndServe(":8182", nil)
 }
