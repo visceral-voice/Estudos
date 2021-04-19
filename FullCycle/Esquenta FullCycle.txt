@@ -1,3 +1,5 @@
+https://github.com/codeedu
+
 Ambiente dos sonhos no Windows com WSL2 e VSCode
 	- https://github.com/codeedu/wsl2-docker-quickstart
 		wslconfig
@@ -72,6 +74,9 @@ React e TypeScript: Pontapé inicial do jeito certo
 			/node-modules
 		Dockerfile II (Sem necessidade de ter a pasta node-modules no projeto da imagem)
 			FROM node:14.15.4-alpine3.12
+			
+			RUN apk add bash
+			
 			USER node
 			WORKDIR /home/node/app
 			COPY . . (Copiando todo o projeto para dentro da imagem)
@@ -100,16 +105,223 @@ Golang: Do zero ao Multithreading
 			go mod tidy
 		Post Pelo Terminal
 			Invoke-WebRequest -Uri http://localhost:8282/product -Method POST -Body (@{"name"= "Inserção do Produto Feliz";}|ConvertTo-Json) -ContentType "application/json"
-		Continuar 01:20:00
 
 Interfaces de impacto com React e Material UI
-
+	- docker-compose
+		docker-compose.yaml
+			version: "3"
+			
+			services:
+			  app:
+			    build: . (Pega o build do dockerFile)
+				entrypoint: .docker/entrypoint.sh
+				ports:
+				  - 3000:3000 (Porta da maquina acessando porta do container)
+				volumes:
+				  - ./:/home/node/app
+		docker-compose up
+		docker-compose up -d
+		docker-compose up --build (compila novamente o dockerFile)
+		docker-compose exec app bash
+			npm install @material-ui/core --save
+			npm install @material-ui/icons --save
+	- Temas
+		theme.ts
+			const palette: PaletteOptions = {
+				type: 'dark',
+				primary: {
+					main: '#FFCD00'
+					contrastText: '#242526',
+				},
+				background: {
+					default: '#242526',
+				},
+			}
+			
+			const theme = createMuiTheme({
+				palette
+			});
+			
+			export default theme
+	    <MuiThemeProvider theme={theme}>	(Colocar o componente principal entre a definição do tema)
+		  <CssBaseLine>
+		</MuiThemeProvider>
+	- Context Api
+		createContext
+			Provider (Passa para os componentes)
+			Servider (Serve os componentes)
+			
 Apache Kafka: Streaming e mensageria das grandes empresas
-
+	- https://kafka.apache.org/
+	- docker
+		docker exec -it apache-kafka (nome da imagem) bash
+			kafka-topics --create --topic=exemplo --bootstarp-server=localhost:9092 (Cria um topico "exemplo" no servidor localhost:9092)
+			kafka-topics --describe --topic=exemplo --bootstrap-server=localhost:9092 (Descreve o topico)
+			kafka-console-producer --topic=exemplo --bootstrap-server=localhost:9092 (entra no modo console)
+			kafka-console-consumer --topic=exemplo --bootstrap-server=localhost:9092
+			kafka-console-consumer --topic=exemplo --bootstrap-server=localhost:9092 --from-beginning (Le todas as mensagens do topic)
+			kafka-console-consumer --topic=exemplo --bootstrap-server=localhost:9092 --group=mygroup (Define um grupo de leitura)
+			kafka-topics --create --topic=exemplo2 --bootstrap-server=localhost:9092 --partitions=2 (Cria um topico "exemplo2" no servidor localhost:9092 com duas partições)
+			
+			
 Desenvolvimento de APIs com Nest.js
-
+	- https://nestjs.com/
+	- Instalar
+		npm install -g @nestjs/cli
+		npx @nestjs/cli new nest-api (Busca a ultima versão do nest e cria o novo projeto nest-api)
+		npm start
+		npm run start ..dev
+	- Comando liberar acesso arquivo ubuntu
+		chmod +x .docker/entrypoint.sh
+	- Dockerfile
+		FROM node:14.15.4-alpine3.12
+		RUN apk add bash
+		RUN npm install -g @nestjs/cli
+		USER node
+		WORKDIR /home/node/app
+		COPY . . 
+	- docker-compose
+		docker-compose.yaml
+			version: "3"
+			
+			services:
+			  app:
+			    build: . (Pega o build do dockerFile)
+				entrypoint: .docker/entrypoint.sh
+				ports:
+				  - 3000:3000 (Porta da maquina acessando porta do container)
+				volumes:
+				  - ./:/home/node/app
+		docker-compose exec app bash
+	- Criação Controller
+		nest g controller test
+	- Criação Recurso
+		nest g resource route
+	- Trabalhar com MongoDb
+		docker-compose exec app bash
+			npm install mongoose @nestjs/mongoose --save
+	- Rest Client (Postman/Insomia pelo VSCode)
+		api.http
+			POST http://localhost:3000/routes
+			Content-type: application/json
+			{
+				"title": "primeira rota",
+				"startposition": {"lat": 0, "lng": 0},
+				"endposition": {"lat": 1, "lng": 1}
+			}
+			
+			###
+			GET http://localhost:3000/routes
+	- Validação de dados
+		docker-compose exec app bash
+			npm install class-transformer class-validator --save
+	- Documentação
+		docker-compose exec app bash
+			npm install swagger-ui-express @nestjs/swagger --save
+		
 Kafka Connect: Integração entre sistemas na prática
-
+	- https://www.confluent.io/
+	- http://localhost:9021 (Abre control center Confluent)
+		docker-compose exec (instacia-mysql) bash
+			CREATE TABLE product (id INT, name VARCHAR(255))
+			INSERT INTO product VALUES 1, 'Carrinho do Kafka'
+		Connector Mysql -> Connector MongoDb
+		Kibana
+			Stack Management
+			Index Management
+			Index Pattern
+			Discover
+			Visualize
+				New 
+			
 Tempo real com Nest.js e Websockets
+	- Criar Workspace no VSCode para trabalhar com as duas aplicações
+	- Habilitar Websockets
+		docker-compose exec app bash (Entrar na API)
+			npm install @nestjs/websockets @nestjs/platform-socket.io --save
+			npm install @types/socket.io --save-dev
+			nest g gateway routes/routes (Cria a estrutura do Websocket na pasta routes)
+		docker-compose exec app bash (Entrar no Front)
+			npm install socket.io-client @types/socket.io-client --save
+			npm install socket.io-client@2.4.0 --save (Determina a versão a ser instalada socket server and cliente same version)						
 
 Kubernetes: Colocando dois microsserviços em produção
+	- https://kind.sigs.k8s.io/ (Rodar um kubertenete no container)
+	- kind create cluster --name-esquenta
+		kubectl cluster-info --context kind-esquenta
+		kubectl get nodes
+		pod.yaml
+			apiVersion: v1
+			kind: Pod 
+			metadara: 
+				name: "esquenta"
+			spec:
+				- name: esquenta
+				  image: "wesleywillians/hello-go-esquenta:latest"
+		kubectl apply -f pod.yaml
+		kubectl get pod
+		kubectl port-forward pod/esquenta 8000:8000 (acesso ao pod sem service)
+		replicaset.yaml (Gera um controlador para o Pod)
+			apiVersion: apps/v1
+			kind: ReplicaSet
+			metadara:
+				name: esquenta
+			spec:
+				selector:
+				  matchLabels:
+					app: esquenta
+				replicas: 2 (Numero de replicas do pod) 
+				template: 
+				  metadata: 
+					labels: 
+					  app: esquenta
+				  spec:
+				    containers:
+						- name: esquenta
+						  image: "wesleywillians/hello-go-esquenta:latest"
+		kubectl get pod
+		kubectl delete pod esquenta
+		kubectl apply -f replicaset.yaml
+		kubectl get replicasets
+		deployment.yaml (Gera um controlador para o replicaset)
+			apiVersion: apps/v1
+			kind: Deployment
+			metadara:
+				name: esquenta
+			spec:
+				selector:
+				  matchLabels:
+					app: esquenta
+				replicas: 2 (Numero de replicas do pod) 
+				template: 
+				  metadata: 
+					labels: 
+					  app: esquenta
+				  spec:
+				    containers:
+						- name: esquenta
+						  image: "wesleywillians/hello-go-esquenta:latest"
+		kubectl apply -f deployment.yaml
+		kubectl get deployments
+		service.yaml
+			apiVersion: v1
+			kind: Service
+			metadara: 
+			  name: esquenta-service
+			spec:
+			  type: ClusterIP (Alterando para LoadBalancer não necessita port-forward a maquina(Serviço externo) gera um ip válido)
+			  selector:
+			    app: esquenta (Vai gerenciar todos os mod de nome esquenta)
+			  ports:
+			    -  port: 80 (porta que quero direcionar o serviço)
+				   targetPort: 8000 (Porta acessada pelo container)
+		kubectl apply -f service.yaml
+		kubectl port-forward svc/esquenta-service 8000:80 (acesso aos pods com service)
+		kubectl get all (Lista todos os serviços no kubertenete)
+
+Twitter Credentials @sricardojf
+API KEY: M0MJFPFcwPBqEKRS3wistHiFb
+API SECRET KEY: O2ZqzK57ieIYsatVun90BO6hJ2g1iif71S2eiacnRPlZUfuKAJ
+BEARER TOKEN: AAAAAAAAAAAAAAAAAAAAAPezOgEAAAAAldesfHxSc%2BFYLpJGRis7%2Bd31lS8%3DDbTFHGK6LXWkOu0ruZkD4YKV02D9apZC7aQkDHPtklkMTkM88A
+
+https://dev.to/mchdax/coletando-dados-do-twitter-com-python-1c7k
