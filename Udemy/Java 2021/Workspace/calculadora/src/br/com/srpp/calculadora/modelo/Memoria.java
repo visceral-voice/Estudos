@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Memoria {
-	
+	//SINGLETON
 	private enum TipoComando {
 		ZERAR, NUMERO, DIV, MULT, SUB, SOMA, IGUAL, VIRGULA, SINAL;
 	};
