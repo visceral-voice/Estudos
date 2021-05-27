@@ -52,6 +52,7 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+*.zip
 
 # Configuration files
 *.properties
