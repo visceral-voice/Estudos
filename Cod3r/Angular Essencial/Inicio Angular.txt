@@ -1,0 +1,15 @@
+Angular Essential
+Install
+	npm i -g @angular/cli
+	
+New Project
+	ng new my-app (cria o projeto Angular completo)
+	ng new frontend --minimal (Cria o peojeto Angular com o necessário apenas)
+	
+Instalar dependecia Materials Design
+	ng add @angular/material
+	
+Gerar Componente
+	ng generate component
+	Abreviando
+		ng g c components/templates/header
